@@ -296,6 +296,66 @@ Install rfcat onto your system.  on most linux systems, this will place `rfcat` 
 * sudo python setup.py install
 * I highly recommend installing `ipython`
   * For deb/ubuntu folk: `apt-get install ipython`
+ 
+ ### Installation (Windows)
+Step 1: Install Python
+Download Python (3.7–3.10) from https://www.python.org.
+Make sure to check "Add Python to PATH" during installation.
+
+Step 2: Install pip and setuptools
+python -m ensurepip --upgrade
+
+Step 3: Install dependencies
+Open Command Prompt and run:
+pip install pyusb pyserial intelhex pyreadline3
+
+You may also need libusb:
+*Download Windows libusb from: https://libusb.info
+*Extract the DLL and place it in the same folder as Python or your script.
+
+Step 4: Download RFCat
+Clone the RFCat repository:
+git clone https://github.com/RobSGT/rfcat-windows.git
+cd rfcat
+If you don’t have Git:
+Download the ZIP from GitHub and extract it.
+
+Step 5: Install RFCat
+From the RFCat directory:
+python setup.py install
+
+Run rfcat.py
+python rfcat.py
+
+### Troubleshooting (Windows)
+Device not detected? Run zadig to install the correct WinUSB driver:
+Download Zadig: https://zadig.akeo.ie
+Plug in your device, find it in the list, and install the WinUSB driver.
+Permission errors? Run Command Prompt as Administrator.
+
+Install the Correct USB Driver with Zadig
+This is the #1 fix for this issue on Windows:
+
+Download Zadig:
+https://zadig.akeo.ie
+
+Plug in your RFCat-compatible device (e.g., Yard Stick One)
+
+Open Zadig, go to:
+Options → List All Devices
+Find your device in the list:
+Usually called:
+CC1111 USB Dongle
+Yard Stick One
+Unknown Device #1
+
+Set the driver to:
+WinUSB (not libusbK, not HID)
+
+Click Install Driver
+Unplug and plug the device back in, then rerun:
+
+
 
 #### Installation with pip
 * cd into the rfcat directory (created by unpacking the tarball or by git clone)
