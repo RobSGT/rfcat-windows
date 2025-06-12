@@ -4,9 +4,17 @@ from __future__ import print_function
 
 import sys
 import logging
-import readline
+import msvcrt
+
 import rlcompleter
-readline.parse_and_bind("tab: complete")
+
+try:
+    import readline
+except ImportError:
+    try:
+        import pyreadline as readline
+    except ImportError:
+        print("Optional: Install pyreadline3 for better tab completion")
 
 from rflib import *
 
@@ -62,7 +70,17 @@ if __name__ == "__main__":
         interactive(ifo.index, DongleClass=RfCat, intro=intro, safemode=ifo.safemode)
 
     else:
-        # do the full-rfcat thing
+         # do the full-rfcat thing
         d = RfCat(ifo.index, debug=False)
-        d.rf_redirection((sys.stdin, sys.stdout))
+        print("RFCat (Windows-Compatible)")
+        print("Type Python commands (e.g. d.ping()) or press Ctrl+C to exit.")
 
+        try:
+            while True:
+                try:
+                    line = input(">>> ")
+                    exec(line)
+                except Exception as e:
+                    print(f"Error: {e}")
+        except KeyboardInterrupt:
+            print("\nExiting RFCat.")
